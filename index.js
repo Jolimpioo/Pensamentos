@@ -3,9 +3,11 @@ import exphbs from "express-handlebars";
 import session from "express-session";
 import sessionFileStore from "session-file-store";
 import flash from "express-flash";
-import connect from "./db/dbConnect.js";
+import sequelize from "./db/dbConnect.js";
 import path from "path";
 import os from "os";
+import Tought from "./models/Tought.js";
+import User from "./models/User.js";
 
 const FileStore = sessionFileStore(session);
 
@@ -55,7 +57,9 @@ app.use((req, res, next) => {
 
 const startServer = async () => {
   try {
-    await connect.sync();
+    await sequelize.sync();
+    // Recria todas as tabelas, apagando os dados; útil para desenvolvimento inicial
+    //.sync({ force: true });
     app.listen(3000, () => {
       console.log("Servidor rodando na porta 3000");
     });
