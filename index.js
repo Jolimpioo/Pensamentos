@@ -8,6 +8,8 @@ import path from "path";
 import os from "os";
 import Tought from "./models/Tought.js";
 import User from "./models/User.js";
+import router from "./routes/toughtsRoutes.js";
+import ToughtController from "./controllers/ToughtsController.js";
 
 const FileStore = sessionFileStore(session);
 
@@ -54,6 +56,11 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Routes
+app.use("/toughts", router);
+
+app.get("/", ToughtController.showToughts);
 
 const startServer = async () => {
   try {
