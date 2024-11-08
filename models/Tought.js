@@ -3,7 +3,7 @@ import sequelize from "../db/dbConnect.js";
 import User from "./User.js";
 
 const Tought = sequelize.define("Thought", {
-  tittle: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
     require: true,
