@@ -9,6 +9,7 @@ import os from "os";
 import Tought from "./models/Tought.js";
 import User from "./models/User.js";
 import router from "./routes/toughtsRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import ToughtController from "./controllers/ToughtsController.js";
 
 const FileStore = sessionFileStore(session);
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/toughts", router);
+app.use("/", authRoutes);
 
 app.get("/", ToughtController.showToughts);
 
