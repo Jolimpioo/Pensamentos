@@ -14,9 +14,7 @@ export default class AuthController {
 
     if (!user) {
       req.flash("message", "Usuario não encontrado!");
-      res.render("auth/login");
-
-      return;
+      return res.render("auth/login");
     }
 
     // checar a senha
@@ -24,13 +22,14 @@ export default class AuthController {
 
     if (!passwordMatch) {
       req.flash("message", "Senha inválida!");
-      res.render("auth/login");
+      return res.render("auth/login");
     }
 
     // iniciar sessao ao logar
     req.session.userid = user.id;
 
     req.flash("message", "Autenticação realizada com sucesso!");
+
     req.session.save(() => {
       res.redirect("/");
     });
