@@ -3,7 +3,13 @@ import User from "../models/User.js";
 
 export default class ToughtController {
   static async showToughts(req, res) {
-    res.render("toughts/home");
+    const taughtsData = Tought.findAll({
+      include: User,
+    });
+
+    const toughts = (await taughtsData).map((result) => result.get({plain: true}));
+
+    res.render("toughts/home", { toughts });
   }
 
   static async dashboard(req, res) {
